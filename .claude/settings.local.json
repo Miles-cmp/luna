@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "PowerShell(Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"cd 'C:\\\\Users\\\\soporte2\\\\Desktop\\\\luna\\\\frontend'; npm run dev\")",
+      "mcp__Claude_in_Chrome__navigate",
+      "PowerShell(Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"cd 'C:\\\\Users\\\\soporte2\\\\Desktop\\\\luna\\\\backend'; npx tsx src/server.ts\")",
+      "PowerShell(Stop-Process -Name \"node\" -ErrorAction SilentlyContinue; Start-Sleep -Seconds 1; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"cd 'C:\\\\Users\\\\soporte2\\\\Desktop\\\\luna\\\\backend'; npx tsx src/server.ts\")"
+    ]
+  }
+}

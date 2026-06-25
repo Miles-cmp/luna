@@ -1,0 +1,113 @@
+.ap-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: grid; place-items: center;
+  z-index: 200; padding: 20px;
+}
+
+.ap-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 100%; max-width: 420px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+
+.ap-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.ap-header-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--surface2); border: 1px solid var(--border);
+  display: grid; place-items: center; color: var(--text); flex-shrink: 0;
+}
+.ap-header-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.ap-header-sub   { font-size: 12px; color: var(--muted); margin-top: 1px; }
+.ap-close {
+  margin-left: auto; color: var(--muted); padding: 6px; border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+.ap-close:hover { background: var(--surface2); color: var(--text); }
+
+/* User strip */
+.ap-user {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.ap-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  color: var(--text-on-accent, #fff); font-weight: 700; font-size: 16px;
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.ap-user-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.ap-user-role  { font-size: 12px; color: var(--muted); text-transform: capitalize; }
+
+.ap-body { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+
+.ap-section { display: flex; flex-direction: column; gap: 10px; }
+.ap-section-title { font-size: 13px; font-weight: 700; color: var(--text); }
+
+/* Themes */
+.ap-themes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.ap-theme-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 18px 12px; border-radius: 10px;
+  border: 2px solid var(--border); background: var(--surface2);
+  color: var(--muted); font-size: 13px; font-weight: 500;
+  transition: all 0.15s;
+}
+.ap-theme-btn:hover { border-color: var(--accent); color: var(--text); }
+.ap-theme-btn.selected { border-color: var(--accent); color: var(--text); background: var(--surface); }
+
+/* Colors */
+.ap-colors { display: flex; flex-wrap: wrap; gap: 8px; }
+.ap-color-swatch {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 2px solid transparent; transition: transform 0.15s, border-color 0.15s;
+}
+.ap-color-swatch:hover   { transform: scale(1.12); }
+.ap-color-swatch.selected { border-color: #fff; transform: scale(1.15); }
+.ap-color-swatch.custom-trigger {
+  background: var(--surface2); border: 2px solid var(--border); color: var(--muted);
+}
+.ap-color-swatch.custom-trigger:hover { border-color: var(--accent); color: var(--text); }
+
+/* Custom color */
+.ap-custom-color {
+  display: flex; align-items: center; gap: 10px; margin-top: 4px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 14px;
+}
+.ap-custom-color input[type=color] {
+  width: 32px; height: 32px; border: none; background: none;
+  cursor: pointer; border-radius: 50%; padding: 0;
+}
+.ap-custom-label { font-size: 12px; color: var(--muted); font-family: monospace; flex: 1; }
+.ap-custom-apply {
+  display: flex; align-items: center; gap: 5px;
+  background: var(--accent); color: var(--text-on-accent, #fff);
+  padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  transition: opacity 0.15s;
+}
+.ap-custom-apply:hover:not(:disabled) { opacity: 0.85; }
+
+.ap-color-warning {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--warning);
+  padding: 4px 2px;
+}
+
+/* Preview */
+.ap-preview {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; border-radius: 10px; border: 1px solid;
+}
+.ap-preview-btn {
+  color: var(--text-on-accent, #fff); padding: 6px 16px; border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+}
