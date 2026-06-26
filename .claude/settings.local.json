@@ -20,7 +20,9 @@
       "PowerShell($cmd = 'echo Cmaster.2018 | sudo -S mysql -u root -e \"SHOW DATABASES\" 2>&1')",
       "PowerShell($cmd = 'echo Cmaster.2018 | sudo -S /tmp/setup_luna.sh 2>&1')",
       "PowerShell($cmd = 'cd /home/soporte/luna/backend && npx tsx src/config/initDb.ts 2>&1')",
-      "PowerShell($cmd = 'sleep 2 && pm2 logs luna-backend --lines 15 --nostream 2>&1')"
+      "PowerShell($cmd = 'sleep 2 && pm2 logs luna-backend --lines 15 --nostream 2>&1')",
+      "PowerShell($cmd = 'echo Cmaster.2018 | sudo -S journalctl -xeu nginx.service --no-pager -n 20 2>&1')",
+      "PowerShell($cmd = 'echo Cmaster.2018 | sudo -S cat /etc/apache2/sites-enabled/glpi.conf 2>&1')"
     ]
   }
 }
