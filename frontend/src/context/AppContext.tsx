@@ -38,7 +38,7 @@ const AppContext = createContext<AppContextType | null>(null)
 const API = 'http://localhost:3001/api'
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const { token } = useAuth()
+  const { token, logout } = useAuth()
   const [categorias, setCategorias] = useState<Categoria[]>([])
   const [tareas,     setTareas]     = useState<Tarea[]>([])
   const [loading,    setLoading]    = useState(true)
@@ -73,40 +73,56 @@ export function AppProvider({ children }: { children: ReactNode }) {
         fetch(`${API}/categorias`, { headers: headers() }),
         fetch(`${API}/tareas`,     { headers: headers() }),
       ])
-      setCategorias(await rC.json() as Categoria[])
-      const rawTareas = await rT.json() as Record<string, unknown>[]
-      setTareas(rawTareas.map(parseTarea))
+
+      // Token expirado o inválido → cerrar sesión automáticamente
+      if (rC.status === 401 || rT.status === 401) {
+        logout()
+        return
+      }
+
+      const dataCats = await rC.json() as unknown
+      const dataTareas = await rT.json() as unknown
+
+      setCategorias(Array.isArray(dataCats) ? dataCats as Categoria[] : [])
+      setTareas(Array.isArray(dataTareas) ? (dataTareas as Record<string, unknown>[]).map(parseTarea) : [])
+    } catch (err) {
+      console.error('Error cargando datos:', err)
     } finally {
       setLoading(false)
     }
-  }, [token, headers])
+  }, [token, headers, logout])
 
   useEffect(() => { void cargar() }, [cargar])
 
   const addTarea = async (t: Omit<Tarea, 'id'>) => {
     const res = await fetch(`${API}/tareas`, { method: 'POST', headers: headers(), body: JSON.stringify(t) })
+    if (res.status === 401) { logout(); return }
     const { id } = await res.json() as { id: number }
     setTareas(prev => [...prev, { ...t, id }])
   }
 
   const updateTarea = async (t: Tarea) => {
-    await fetch(`${API}/tareas/${t.id}`, { method: 'PUT', headers: headers(), body: JSON.stringify(t) })
+    const res = await fetch(`${API}/tareas/${t.id}`, { method: 'PUT', headers: headers(), body: JSON.stringify(t) })
+    if (res.status === 401) { logout(); return }
     setTareas(prev => prev.map(x => x.id === t.id ? t : x))
   }
 
   const moverTarea = async (id: number, columna: Tarea['columna_kanban']) => {
-    await fetch(`${API}/tareas/${id}/mover`, { method: 'PATCH', headers: headers(), body: JSON.stringify({ columna_kanban: columna }) })
+    const res = await fetch(`${API}/tareas/${id}/mover`, { method: 'PATCH', headers: headers(), body: JSON.stringify({ columna_kanban: columna }) })
+    if (res.status === 401) { logout(); return }
     setTareas(prev => prev.map(x => x.id === id ? { ...x, columna_kanban: columna } : x))
   }
 
   const addCategoria = async (nombre: string, color: string) => {
     const res = await fetch(`${API}/categorias`, { method: 'POST', headers: headers(), body: JSON.stringify({ nombre, color }) })
+    if (res.status === 401) { logout(); return }
     const cat = await res.json() as Categoria
     setCategorias(prev => [...prev, cat])
   }
 
   const updateCategoria = async (id: number, data: Partial<Omit<Categoria,'id'>>) => {
-    await fetch(`${API}/categorias/${id}`, { method: 'PUT', headers: headers(), body: JSON.stringify(data) })
+    const res = await fetch(`${API}/categorias/${id}`, { method: 'PUT', headers: headers(), body: JSON.stringify(data) })
+    if (res.status === 401) { logout(); return }
     setCategorias(prev => prev.map(c => c.id === id ? { ...c, ...data } : c))
   }
 
