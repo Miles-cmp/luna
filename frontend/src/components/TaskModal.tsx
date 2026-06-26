@@ -7,8 +7,9 @@ import './TaskModal.css'
 interface Props {
   open: boolean
   onClose: () => void
-  defaultFecha?: string   // YYYY-MM-DD
-  tarea?: Tarea | null    // edición
+  defaultFecha?: string
+  defaultColumna?: Tarea['columna_kanban']
+  tarea?: Tarea | null
 }
 
 const empty = (fecha: string): Omit<Tarea, 'id'> => ({
@@ -20,7 +21,7 @@ const empty = (fecha: string): Omit<Tarea, 'id'> => ({
   recordatorio_min: null, integrantes: [],
 })
 
-export default function TaskModal({ open, onClose, defaultFecha, tarea }: Props) {
+export default function TaskModal({ open, onClose, defaultFecha, defaultColumna, tarea }: Props) {
   const { categorias, addTarea, updateTarea } = useApp()
   const hoy = new Date().toISOString().slice(0, 10)
   const [form, setForm] = useState<Omit<Tarea, 'id'>>(empty(defaultFecha ?? hoy))
@@ -32,11 +33,12 @@ export default function TaskModal({ open, onClose, defaultFecha, tarea }: Props)
       const { id: _, ...rest } = tarea
       setForm(rest)
     } else {
-      setForm(empty(defaultFecha ?? hoy))
+      const base = empty(defaultFecha ?? hoy)
+      setForm({ ...base, columna_kanban: defaultColumna ?? base.columna_kanban })
     }
     setError('')
     setIntegranteInput('')
-  }, [open, tarea, defaultFecha])
+  }, [open, tarea, defaultFecha, defaultColumna])
 
   if (!open) return null
 

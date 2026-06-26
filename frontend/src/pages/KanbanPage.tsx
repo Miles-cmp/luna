@@ -131,6 +131,7 @@ export default function KanbanPage() {
         onClose={() => setModalOpen(false)}
         tarea={editTarea}
         defaultFecha={editTarea ? undefined : new Date().toISOString().slice(0,10)}
+        defaultColumna={editTarea ? undefined : defCol}
       />
     </main>
   )

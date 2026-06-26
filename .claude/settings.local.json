@@ -5,7 +5,22 @@
       "PowerShell(Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"cd 'C:\\\\Users\\\\soporte2\\\\Desktop\\\\luna\\\\frontend'; npm run dev\")",
       "mcp__Claude_in_Chrome__navigate",
       "PowerShell(Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"cd 'C:\\\\Users\\\\soporte2\\\\Desktop\\\\luna\\\\backend'; npx tsx src/server.ts\")",
-      "PowerShell(Stop-Process -Name \"node\" -ErrorAction SilentlyContinue; Start-Sleep -Seconds 1; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"cd 'C:\\\\Users\\\\soporte2\\\\Desktop\\\\luna\\\\backend'; npx tsx src/server.ts\")"
+      "PowerShell(Stop-Process -Name \"node\" -ErrorAction SilentlyContinue; Start-Sleep -Seconds 1; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"cd 'C:\\\\Users\\\\soporte2\\\\Desktop\\\\luna\\\\backend'; npx tsx src/server.ts\")",
+      "Skill(run)",
+      "Skill(run:*)",
+      "PowerShell(Start-Process powershell -ArgumentList '-NoExit', '-Command', 'cd C:\\\\Users\\\\soporte2\\\\Desktop\\\\luna\\\\backend; npm run dev')",
+      "PowerShell(Start-Process powershell -ArgumentList '-NoExit', '-Command', 'cd C:\\\\Users\\\\soporte2\\\\Desktop\\\\luna\\\\frontend; npm run dev')",
+      "PowerShell(& \"C:\\\\Program Files\\\\PuTTY\\\\plink.exe\" -ssh soporte@10.1.1.199 -pw \"Cmaster.2018\" -batch \"whoami && lsb_release -d && echo NODE: && node --version 2>/dev/null || echo 'no node' && echo NGINX: && nginx -v 2>&1 && echo PM2: && pm2 --version 2>/dev/null || echo 'no pm2' && echo MYSQL: && mysql --version 2>/dev/null || echo 'no mysql' && df -h / | tail -1\")",
+      "PowerShell(& \"C:\\\\Program Files\\\\PuTTY\\\\plink.exe\" -ssh soporte@10.1.1.199 -pw \"Cmaster.2018\" -batch $cmd)",
+      "PowerShell($cmd = 'echo Cmaster.2018 | sudo -S apt-get update -qq 2>&1 | tail -3 && echo SUDO_OK')",
+      "PowerShell($cmd = 'sudo -n mysql -u root -e \"SHOW DATABASES;\" 2>&1 || mysql -u root -e \"SHOW DATABASES;\" 2>&1')",
+      "PowerShell($cmd = 'mysql -u root --password=\"\" -e \"SHOW DATABASES;\" 2>&1; mysql -u root --password=\"Cmaster.2018\" -e \"SHOW DATABASES;\" 2>&1')",
+      "PowerShell($cmd = 'cat /etc/mysql/debian.cnf 2>/dev/null | head -10; sudo cat /etc/mysql/debian.cnf 2>/dev/null | head -10')",
+      "PowerShell($cmd = 'echo Cmaster.2018 | sudo -S mysql -u root -e \"SHOW DATABASES;\" 2>&1')",
+      "PowerShell($cmd = 'echo Cmaster.2018 | sudo -S mysql -u root -e \"SHOW DATABASES\" 2>&1')",
+      "PowerShell($cmd = 'echo Cmaster.2018 | sudo -S /tmp/setup_luna.sh 2>&1')",
+      "PowerShell($cmd = 'cd /home/soporte/luna/backend && npx tsx src/config/initDb.ts 2>&1')",
+      "PowerShell($cmd = 'sleep 2 && pm2 logs luna-backend --lines 15 --nostream 2>&1')"
     ]
   }
 }
